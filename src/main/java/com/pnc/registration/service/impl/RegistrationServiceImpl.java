@@ -32,7 +32,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new Exception("Password is null or empty or less than 8 characters");
         }
 
-        if (registrationRequestBody.getIP().equals("") || registrationRequestBody.getIP() == null) {
+        if (registrationRequestBody.getIp().equals("") || registrationRequestBody.getIp() == null) {
             throw new Exception("IP is null or empty");
         }
 
@@ -42,7 +42,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         //calling ip API
         RestTemplate restTemplate = new RestTemplate();
         String uri = "http://ip-api.com/json/";
-        ResponseEntity<RegistrationIpResponse> responseIP = restTemplate.getForEntity(uri + registrationRequestBody.getIP(), RegistrationIpResponse.class);
+        ResponseEntity<RegistrationIpResponse> responseIP = restTemplate.getForEntity(uri + registrationRequestBody.getIp(), RegistrationIpResponse.class);
 
         //construction repsonse
         RegistrationResponse response = new RegistrationResponse();

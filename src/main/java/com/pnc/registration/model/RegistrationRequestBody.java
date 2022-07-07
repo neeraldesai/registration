@@ -13,6 +13,6 @@ public class RegistrationRequestBody {
 
     private String password;
 
-    private String IP;
+    private String ip;
 
 }
