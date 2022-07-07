@@ -28,7 +28,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new Exception("Username is null or empty");
         }
 
-        if (registrationRequestBody.getPassword().equals("") || registrationRequestBody.getPassword() == null || registrationRequestBody.getPassword().length() < 8) {
+        if (registrationRequestBody.getPassword().equals("") || registrationRequestBody.getPassword() == null || registrationRequestBody.getPassword().length() < 9) {
             throw new Exception("Password is null or empty or less than 8 characters");
         }
 
@@ -44,7 +44,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         String uri = "http://ip-api.com/json/";
         ResponseEntity<RegistrationIpResponse> responseIP = restTemplate.getForEntity(uri + registrationRequestBody.getIp(), RegistrationIpResponse.class);
 
-        //construction repsonse
+        //constructing repsonse
         RegistrationResponse response = new RegistrationResponse();
         response.setCity(responseIP.getBody().getCity());
         UUID id = UUID.randomUUID();

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.pnc.registration.service.RegistrationServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-07-07T21:18:44" hostname="Neerals-MacBook-Pro.local" time="0.631">
+  <properties/>
+  <testcase name="getRegistration() || Successfully invoke registration service" classname="com.pnc.registration.service.RegistrationServiceTest" time="0.631"/>
+  <system-out><![CDATA[16:18:44.708 [Test worker] DEBUG org.springframework.web.client.RestTemplate - HTTP GET http://ip-api.com/json/24.48.0.1
+16:18:44.752 [Test worker] DEBUG org.springframework.web.client.RestTemplate - Accept=[application/json, application/*+json]
+16:18:45.046 [Test worker] DEBUG org.springframework.web.client.RestTemplate - Response 200 OK
+16:18:45.051 [Test worker] DEBUG org.springframework.web.client.RestTemplate - Reading to [com.pnc.registration.model.RegistrationIpResponse]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
