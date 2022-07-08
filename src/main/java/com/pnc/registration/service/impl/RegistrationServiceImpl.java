@@ -1,5 +1,8 @@
 package com.pnc.registration.service.impl;
 
+import com.pnc.registration.exception.InputIsNullOrEmptyException;
+import com.pnc.registration.exception.PasswordInvalidException;
+import com.pnc.registration.exception.UserOutsideCanadaException;
 import com.pnc.registration.model.RegistrationIpResponse;
 import com.pnc.registration.model.RegistrationRequestBody;
 import com.pnc.registration.model.RegistrationResponse;
@@ -25,15 +28,15 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         //validations
         if (registrationRequestBody.getUsername().equals("") || registrationRequestBody.getUsername() == null) {
-            throw new Exception("Username is null or empty");
+            throw new InputIsNullOrEmptyException();
         }
 
-        if (registrationRequestBody.getPassword().equals("") || registrationRequestBody.getPassword() == null || registrationRequestBody.getPassword().length() < 9) {
-            throw new Exception("Password is null or empty or less than 8 characters");
+        if (registrationRequestBody.getPassword().equals("") || registrationRequestBody.getPassword() == null) {
+            throw new InputIsNullOrEmptyException();
         }
 
         if (registrationRequestBody.getIp().equals("") || registrationRequestBody.getIp() == null) {
-            throw new Exception("IP is null or empty");
+            throw new InputIsNullOrEmptyException();
         }
 
         //password validations
@@ -43,6 +46,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         RestTemplate restTemplate = new RestTemplate();
         String uri = "http://ip-api.com/json/";
         ResponseEntity<RegistrationIpResponse> responseIP = restTemplate.getForEntity(uri + registrationRequestBody.getIp(), RegistrationIpResponse.class);
+
+        if (!responseIP.getBody().getCountry().equals("Canada")) {
+            throw new UserOutsideCanadaException();
+        }
 
         //constructing repsonse
         RegistrationResponse response = new RegistrationResponse();
@@ -62,6 +69,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         Pattern p = Pattern.compile(regex);
 
         Matcher m = p.matcher(str);
+
+        if (str.length() < 9) {
+            throw new PasswordInvalidException();
+        }
 
         if (m.matches()) {
             //do nothing
